@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Deep Learning — Viva Flashcards (Units III–VI)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg1: linear-gradient(135deg,#0f172a 0%, #0f2540 50%, #04243a 100%);
+    --card-bg: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    --glass: rgba(255,255,255,0.03);
+    --accent: #7c3aed;
+    --muted: #9aa7bd;
+    --glass-border: rgba(255,255,255,0.06);
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+  body{
+    background: var(--bg1);
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+
+  /* Navbar */
+  .navbar {
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    backdrop-filter: blur(10px) saturate(120%);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 4px 20px rgba(2,6,23,0.4);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 16px 24px;
+  }
+
+  .navbar-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .navbar-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .brand {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg,#10b981,#3b82f6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: white;
+    font-size: 18px;
+    box-shadow: 0 4px 12px rgba(15,23,42,0.5);
+    flex-shrink: 0;
+  }
+  
+  .brand-text h1 { 
+    font-size: 18px;
+    margin: 0;
+    color: #e6eef8;
+    line-height: 1.2;
+  }
+  
+  .brand-text p { 
+    margin: 4px 0 0 0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.3;
+  }
+
+  .navbar-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  /* Filters Row */
+  .filters-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto auto;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .filter-group {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .filter-group:focus-within {
+    border-color: rgba(124,58,237,0.4);
+    background: rgba(124,58,237,0.08);
+  }
+
+  .filter-icon {
+    color: var(--muted);
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  input[type="search"] {
+    background: transparent;
+    border: 0;
+    outline: 0;
+    color: #e6eef8;
+    width: 100%;
+    font-size: 14px;
+  }
+
+  input[type="search"]::placeholder {
+    color: var(--muted);
+  }
+
+  select {
+    background: transparent;
+    border: 0;
+    color: #e6eef8;
+    font-weight: 600;
+    font-size: 14px;
+    outline: 0;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  select option {
+    background: #1e293b;
+    color: #e6eef8;
+  }
+
+  .stats-badge {
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .btn {
+    background: linear-gradient(90deg,var(--accent),#3b82f6);
+    padding: 10px 16px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 700;
+    border: 0;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(59,130,246,0.15);
+    transition: all 0.2s ease;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(59,130,246,0.25);
+  }
+
+  .btn:active {
+    transform: translateY(0);
+  }
+
+  .btn.ghost {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: none;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .btn.ghost:hover {
+    background: rgba(255,255,255,0.04);
+    color: #e6eef8;
+  }
+
+  .btn-icon {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 10px;
+    border-radius: 10px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .btn-icon:hover {
+    background: rgba(255,255,255,0.06);
+    color: #e6eef8;
+  }
+
+  /* Mobile Menu Toggle */
+  .menu-toggle {
+    display: none;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 10px;
+    border-radius: 10px;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  /* Main Content */
+  .main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 24px;
+    min-height: calc(100vh - 180px);
+  }
+
+  /* Sidebar */
+  .sidebar {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.04);
+    height: fit-content;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    position: sticky;
+    top: 180px;
+  }
+
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .sidebar-header strong {
+    color: #e6eef8;
+    font-size: 15px;
+  }
+
+  .unit-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .unit-item {
+    padding: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  .unit-item:hover {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.06);
+  }
+
+  .unit-item.active {
+    background: linear-gradient(90deg, rgba(124,58,237,0.15), rgba(59,130,246,0.08));
+    border-color: rgba(124,58,237,0.25);
+  }
+
+  .unit-item-title {
+    font-weight: 700;
+    color: #e6eef8;
+    font-size: 14px;
+  }
+
+  .unit-item-count {
+    font-size: 12px;
+    color: var(--muted);
+    background: rgba(255,255,255,0.03);
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+
+  /* Cards Area */
+  .cards-area {
+    min-height: 400px;
+  }
+
+  .cards-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .cards-controls-left {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .cards-controls-right {
+    display: flex;
+    gap: 10px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    perspective: 1000px;
+  }
+
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    border-radius: 12px;
+    transform-style: preserve-3d;
+    transition: transform 600ms cubic-bezier(.2,.9,.3,1);
+  }
+
+  .card.flipped .card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .face {
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    padding: 20px;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 8px 24px rgba(2,6,23,0.5);
+    border: 1px solid rgba(255,255,255,0.04);
+    background: var(--card-bg);
+    backdrop-filter: blur(4px);
+  }
+
+  .face.back {
+    transform: rotateY(180deg);
+  }
+
+  .q {
+    font-weight: 700;
+    color: #f1f9ff;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .a {
+    font-size: 14px;
+    color: #dceaf7;
+    overflow: auto;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .meta {
+    margin-top: auto;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .chip {
+    background: rgba(255,255,255,0.04);
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    border: 1px solid rgba(255,255,255,0.03);
+  }
+
+  .empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 60px 20px;
+    font-size: 15px;
+  }
+
+  .small {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* Tablet Styles (768px - 1024px) */
+  @media (max-width: 1024px) {
+    .main {
+      grid-template-columns: 240px 1fr;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .filters-row {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .stats-badge {
+      display: none;
+    }
+
+    .grid {
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+  }
+
+  /* Mobile Styles (≤768px) */
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 12px 16px;
+    }
+
+    .brand-text p {
+      display: none;
+    }
+
+    .navbar-actions {
+      display: none;
+    }
+
+    .menu-toggle {
+      display: block;
+    }
+
+    .filters-row {
+      grid-template-columns: 1fr;
+    }
+
+    .filters-row.mobile-hidden {
+      display: none;
+    }
+
+    .filters-row.mobile-visible {
+      display: grid;
+    }
+
+    .main {
+      grid-template-columns: 1fr;
+      padding: 16px;
+      gap: 16px;
+    }
+
+    .sidebar {
+      position: static;
+      max-height: none;
+      order: 2;
+    }
+
+    .cards-area {
+      order: 1;
+    }
+
+    .cards-controls {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .cards-controls-left,
+    .cards-controls-right {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .card-inner {
+      height: 220px;
+    }
+  }
+
+  /* Small Mobile (≤480px) */
+  @media (max-width: 480px) {
+    .logo {
+      width: 40px;
+      height: 40px;
+      font-size: 16px;
+    }
+
+    .brand-text h1 {
+      font-size: 16px;
+    }
+
+    .navbar {
+      padding: 10px 12px;
+    }
+
+    .main {
+      padding: 12px;
+    }
+
+    .filter-group {
+      padding: 8px 12px;
+    }
+
+    .btn {
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+
+    .card-inner {
+      height: 200px;
+    }
+
+    .face {
+      padding: 16px;
+    }
+
+    .q, .a {
+      font-size: 13px;
+    }
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.02);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.15);
+  }
+</style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-top">
+        <div class="brand">
+          <div class="logo">DL</div>
+          <div class="brand-text">
+            <h1>Deep Learning — Viva Flashcards</h1>
+            <p>Units III–VI (SPPU 2019). Flip to reveal answers</p>
+          </div>
+        </div>
+        <div class="navbar-actions">
+          <button class="btn" id="shuffleBtn" title="Shuffle cards">🔀 Shuffle</button>
+          <button class="btn ghost" id="showAllBtn">Show All</button>
+        </div>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+      </div>
+
+      <!-- Filters Row -->
+      <div class="filters-row" id="filtersRow">
+        <div class="filter-group">
+          <span class="filter-icon">🔍</span>
+          <input id="search" type="search" placeholder="Search questions or answers..." />
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-icon">📚</span>
+          <select id="unitSelect" aria-label="Choose unit">
+            <option value="all">All Units</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-icon">🔄</span>
+          <select id="sortSelect" aria-label="Sort cards">
+            <option value="default">Default Order</option>
+            <option value="qasc">Question A→Z</option>
+            <option value="qdesc">Question Z→A</option>
+            <option value="shuffle">Random</option>
+          </select>
+        </div>
+
+        <div class="stats-badge" id="count">Loading…</div>
+
+        <button class="btn-icon" id="downloadJSON" title="Download JSON">💾</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <strong>Units</strong>
+        <span class="small">Select to filter</span>
+      </div>
+      <div class="unit-list" id="unitList"></div>
+    </aside>
+
+    <!-- Cards Area -->
+    <section class="cards-area">
+      <div class="cards-controls">
+        <div class="cards-controls-left">
+          <span class="small">💡 Click cards to flip • Use keyboard: F, ← →</span>
+        </div>
+        <div class="cards-controls-right">
+          <button class="btn ghost" id="printBtn">🖨️ Print</button>
+        </div>
+      </div>
+
+      <div id="grid" class="grid"></div>
+      <div id="empty" class="empty" style="display:none;">
+        <div style="font-size: 48px; margin-bottom: 12px;">🔍</div>
+        No cards found. Try clearing filters or search.
+      </div>
+    </section>
+  </div>
+
+<script>
+(async function(){
+//   Sample data - replace with your flashcardDL.json
+const dataUrl = 'flashcardDL.json';
+  let db = await fetch(dataUrl).then(r=>r.json()).catch(e=>{
+    alert('Could not load flashcards.json — make sure it is in the same folder as index.html');
+    throw e;
+  });
+
+  // Flatten cards with unit metadata
+  let cards = [];
+  db.units.forEach((u, ui) => {
+    u.cards.forEach((c, ci) => {
+      cards.push({
+        id: `${ui}-${ci}`,
+        unit: u.title,
+        unitIndex: ui,
+        q: c.question.trim(),
+        a: c.answer.trim()
+      });
+    });
+  });
+
+  // DOM refs
+  const grid = document.getElementById('grid');
+  const unitList = document.getElementById('unitList');
+  const unitSelect = document.getElementById('unitSelect');
+  const searchEl = document.getElementById('search');
+  const countEl = document.getElementById('count');
+  const shuffleBtn = document.getElementById('shuffleBtn');
+  const showAllBtn = document.getElementById('showAllBtn');
+  const sortSelect = document.getElementById('sortSelect');
+  const emptyEl = document.getElementById('empty');
+  const downloadJSON = document.getElementById('downloadJSON');
+  const printBtn = document.getElementById('printBtn');
+  const menuToggle = document.getElementById('menuToggle');
+  const filtersRow = document.getElementById('filtersRow');
+
+  // Mobile menu toggle
+  let filtersVisible = window.innerWidth > 768;
+  menuToggle.addEventListener('click', () => {
+    filtersVisible = !filtersVisible;
+    if (filtersVisible) {
+      filtersRow.classList.remove('mobile-hidden');
+      filtersRow.classList.add('mobile-visible');
+    } else {
+      filtersRow.classList.add('mobile-hidden');
+      filtersRow.classList.remove('mobile-visible');
+    }
+  });
+
+  // Populate unit list & select
+  const units = db.units.map(u => u.title);
+  units.forEach((u, i) => {
+    const el = document.createElement('div');
+    el.className = 'unit-item';
+    el.innerHTML = `
+      <div class="unit-item-title">${escapeHtml(u)}</div>
+      <div class="unit-item-count">${db.units[i].cards.length}</div>
+    `;
+    el.addEventListener('click', () => {
+      unitSelect.value = i;
+      render();
+      Array.from(unitList.children).forEach((n, ni) => 
+        n.classList.toggle('active', ni == i)
+      );
+    });
+    unitList.appendChild(el);
+
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = u;
+    unitSelect.appendChild(opt);
+  });
+
+  // State
+  let state = {
+    unit: 'all',
+    query: '',
+    sort: 'default',
+    shown: [...cards]
+  };
+
+  function updateCount() {
+    countEl.textContent = `${state.shown.length} cards`;
+  }
+
+  function makeCardNode(card) {
+    const c = document.createElement('div');
+    c.className = 'card';
+    c.tabIndex = 0;
+    c.innerHTML = `
+      <div class="card-inner">
+        <div class="face front">
+          <div class="q">${escapeHtml(card.q)}</div>
+          <div class="meta">
+            <div class="chip">${escapeHtml(card.unit)}</div>
+            <div style="font-size:11px;color:var(--muted)">#${card.id}</div>
+          </div>
+        </div>
+        <div class="face back">
+          <div class="a">${escapeHtml(card.a)}</div>
+          <div class="meta">
+            <div class="chip">✓ Answer</div>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    c.addEventListener('click', () => {
+      c.classList.toggle('flipped');
+    });
+
+    c.addEventListener('keydown', (e) => {
+      if (e.key.toLowerCase() === 'f') c.classList.toggle('flipped');
+      if (e.key === 'ArrowRight') focusNextCard(c, 1);
+      if (e.key === 'ArrowLeft') focusNextCard(c, -1);
+    });
+    
+    return c;
+  }
+
+  function focusNextCard(current, dir) {
+    const all = Array.from(grid.querySelectorAll('.card'));
+    const idx = all.indexOf(current);
+    const next = all[idx + dir] || all[(dir > 0) ? 0 : all.length - 1];
+    if (next) next.focus();
+  }
+
+  function render() {
+    const q = state.query.trim().toLowerCase();
+    let list = cards.filter(c => {
+      if (state.unit !== 'all' && String(state.unit) !== 'all') {
+        if (c.unitIndex !== Number(state.unit)) return false;
+      }
+      if (!q) return true;
+      return (c.q + ' ' + c.a).toLowerCase().includes(q);
+    });
+
+    // Sort
+    if (state.sort === 'qasc') list.sort((a, b) => a.q.localeCompare(b.q));
+    else if (state.sort === 'qdesc') list.sort((a, b) => b.q.localeCompare(a.q));
+    else if (state.sort === 'shuffle') shuffleInplace(list);
+
+    state.shown = list;
+    grid.innerHTML = '';
+    
+    if (list.length === 0) {
+      emptyEl.style.display = 'block';
+    } else {
+      emptyEl.style.display = 'none';
+      list.forEach(c => grid.appendChild(makeCardNode(c)));
+    }
+    
+    updateCount();
+  }
+
+  // Helpers
+  function shuffleInplace(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+  }
+
+  function escapeHtml(s) {
+    return s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+  }
+
+  // Events
+  searchEl.addEventListener('input', e => {
+    state.query = e.target.value;
+    render();
+  });
+
+  unitSelect.addEventListener('change', e => {
+    state.unit = e.target.value;
+    render();
+    Array.from(unitList.children).forEach((n, ni) =>
+      n.classList.toggle('active', String(ni) === String(state.unit))
+    );
+  });
+
+  shuffleBtn.addEventListener('click', () => {
+    state.sort = 'shuffle';
+    render();
+  });
+
+  showAllBtn.addEventListener('click', () => {
+    state.unit = 'all';
+    state.query = '';
+    searchEl.value = '';
+    unitSelect.value = 'all';
+    Array.from(unitList.children).forEach(n => n.classList.remove('active'));
+    render();
+  });
+
+  sortSelect.addEventListener('change', e => {
+    state.sort = e.target.value;
+    render();
+  });
+
+  downloadJSON.addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'flashcardDL.json';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  });
+
+  printBtn.addEventListener('click', () => window.print());
+
+  // Initialize
+  render();
+})();
+</script>
+</body>
+</html>

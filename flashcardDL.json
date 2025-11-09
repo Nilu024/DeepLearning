@@ -1,0 +1,120 @@
+{
+  "meta": {
+    "subject": "Deep Learning (SPPU 2019) Units III–VI",
+    "generated": "2025-11-09",
+    "notes": "Questions and concise answers for viva practice. Each unit contains cards with a question and an answer."
+  },
+  "units": [
+    {
+      "title": "Unit III – Recurrent Neural Networks (RNNs)",
+      "cards": [
+        { "question": "What is a Recurrent Neural Network (RNN)?", "answer": "An RNN is a neural network with cycles that process sequential data by maintaining an internal hidden state which captures information about previous inputs." },
+        { "question": "How is RNN different from a Feed-Forward Neural Network (FNN)?", "answer": "FNNs assume independent inputs and no temporal state; RNNs have recurrent connections and a hidden state allowing them to model sequences and temporal dependencies." },
+        { "question": "What are the advantages of RNNs?", "answer": "They model sequential/temporal data naturally, share parameters across time steps, and can handle variable-length sequences." },
+        { "question": "What are the limitations of simple RNNs?", "answer": "They suffer from vanishing/exploding gradients, difficulty learning long-range dependencies, and training instability for long sequences." },
+        { "question": "What is the role of hidden state in RNNs?", "answer": "The hidden state stores a compressed summary of previous inputs and is updated every time step to carry temporal information forward." },
+        { "question": "What is the concept of temporal dependencies in RNNs?", "answer": "Temporal dependencies refer to how earlier time steps influence later outputs; short-term vs long-term depends on how far back the influence persists." },
+        { "question": "Name different types of RNNs.", "answer": "Simple RNNs (vanilla), LSTM, GRU, Bidirectional RNNs, Deep/stacked RNNs, and recursive RNNs." },
+        { "question": "Explain many-to-one, one-to-many, and many-to-many RNN architectures with examples.", "answer": "Many-to-one: sequence → single output (e.g., sentiment). One-to-many: single input → sequence (e.g., image captioning from an image). Many-to-many: sequence → sequence (e.g., translation, speech recognition). Some many-to-many are aligned (same length) and some are not." },
+        { "question": "What is a Bidirectional RNN?", "answer": "A model that processes the sequence in both forward and backward directions and concatenates or combines their hidden states, allowing use of both past and future context." },
+        { "question": "What is a Deep RNN?", "answer": "An RNN with multiple stacked recurrent layers (more than one recurrent layer between input and output) to learn hierarchical temporal features." },
+        { "question": "What problem does LSTM solve compared to standard RNNs?", "answer": "LSTM mitigates vanishing gradients and learns longer-term dependencies using gated memory cells that control information flow." },
+        { "question": "What is vanishing and exploding gradient problem?", "answer": "During backprop through time, gradients can shrink exponentially (vanishing) or grow exponentially (exploding), making learning long-range dependencies difficult or unstable." },
+        { "question": "Explain the architecture of LSTM.", "answer": "LSTM has a cell state and gates: input, forget, and output gates. Gates compute what to remove, what to add, and what to expose from the cell state; the structure preserves information over many steps." },
+        { "question": "What are the three gates in LSTM?", "answer": "Forget gate, input (or update) gate, and output gate." },
+        { "question": "What is the function of the forget gate?", "answer": "It decides which parts of the previous cell state to keep or discard, enabling selective memory." },
+        { "question": "What is the cell state in LSTM?", "answer": "A pathway that carries long-term information with minimal modifications; gates control additions/removals to it." },
+        { "question": "Difference between GRU and LSTM.", "answer": "GRU has a simpler structure with two gates (reset and update), fewer parameters, and combines cell and hidden state; LSTM has separate cell state and three gates, which can be more flexible." },
+        { "question": "What are the applications of LSTM?", "answer": "Sequence modeling tasks: language modeling, machine translation, speech recognition, time-series forecasting, and captioning." },
+        { "question": "What is an Encoder-Decoder model?", "answer": "A sequence-to-sequence architecture where an encoder maps input sequence to a vector (or states) and a decoder generates the output sequence from that representation." },
+        { "question": "Where is Encoder-Decoder architecture used?", "answer": "Machine translation, summarization, dialogue systems, and generally sequence-to-sequence tasks." },
+        { "question": "Explain the working of Encoder-Decoder in sequence-to-sequence models.", "answer": "Encoder processes input timesteps and produces a context vector (or states). Decoder, initialized with that context, generates outputs step-by-step, often using its own previous outputs as inputs." },
+        { "question": "What is the use of attention in Encoder-Decoder networks?", "answer": "Attention allows the decoder to focus on different parts of the encoder outputs for each output timestep, improving handling of long inputs and alignment." },
+        { "question": "What is a Recursive Neural Network?", "answer": "A model applying the same set of weights recursively over structured inputs like trees (used for hierarchical structures), not to be confused with recurrent in time." },
+        { "question": "How is Recursive NN different from Recurrent NN?", "answer": "Recursive NN works over hierarchical structures (trees) combining child nodes to parent representations; Recurrent NN works over temporal sequences." },
+        { "question": "Give one example where Recursive NN is used.", "answer": "Parsing or sentiment analysis based on constituency parse trees (e.g., tree-structured composition of phrases)." }
+      ]
+    },
+    {
+      "title": "Unit IV – Autoencoders",
+      "cards": [
+        { "question": "What is an Autoencoder?", "answer": "An autoencoder is an unsupervised neural network that learns to reconstruct its input by compressing it to a lower-dimensional latent representation (encoder) and reconstructing (decoder)." },
+        { "question": "What are the components of an Autoencoder?", "answer": "Encoder, latent (bottleneck) representation, decoder, and a reconstruction loss (e.g., MSE)." },
+        { "question": "What is the purpose of the encoder and decoder?", "answer": "Encoder maps input to latent code; decoder maps latent code back to input space to reconstruct the original." },
+        { "question": "What is the latent (bottleneck) representation?", "answer": "A compact, usually lower-dimensional vector capturing essential features required to reconstruct the input." },
+        { "question": "What is the loss function used in autoencoders?", "answer": "Commonly mean-squared error (MSE) for continuous inputs or cross-entropy for binary/categorical inputs — any reconstruction loss appropriate to data." },
+        { "question": "What is an Undercomplete Autoencoder?", "answer": "An autoencoder where latent dimension is smaller than input dimension, forcing the model to learn compressed features." },
+        { "question": "What is a Regularized Autoencoder?", "answer": "An autoencoder that uses additional constraints (regularization) like sparsity, noise robustness, or contractive penalties to enforce useful representations." },
+        { "question": "Explain Sparse Autoencoders.", "answer": "They add a sparsity penalty so that hidden units are mostly inactive, encouraging learning of independent features even when latent dimension is large." },
+        { "question": "Explain Denoising Autoencoders.", "answer": "They corrupt inputs with noise and train the network to reconstruct the clean input, learning robust features useful for denoising." },
+        { "question": "What are Contractive Autoencoders?", "answer": "They add a penalty on the Jacobian of the encoder activations w.r.t. input to encourage stability/robustness to small input changes." },
+        { "question": "What is the purpose of Stochastic Encoders and Decoders?", "answer": "To model uncertainty and generate diverse outputs; a key example is the Variational Autoencoder where encoding is probabilistic." },
+        { "question": "What is the difference between Variational Autoencoder (VAE) and basic Autoencoder?", "answer": "VAE is probabilistic: it learns parameters of a latent distribution (mean, variance) and uses a KL divergence term to regularize the latent distribution, enabling sampling/generation." },
+        { "question": "List some real-life applications of autoencoders.", "answer": "Denoising, dimensionality reduction, anomaly detection, data compression, representation learning, and pretraining." },
+        { "question": "How are autoencoders used in image denoising?", "answer": "Train a denoising AE with noisy inputs and clean targets; encoder learns robust features and decoder reconstructs the clean image." },
+        { "question": "How can autoencoders be used for anomaly detection?", "answer": "Train on normal data; anomalies reconstruct poorly and yield large reconstruction errors which can be flagged." },
+        { "question": "What are the limitations of autoencoders?", "answer": "They may learn trivial identity mapping if not constrained, require careful architecture/regularization, and basic AEs do not provide a well-structured generative model." }
+      ]
+    },
+    {
+      "title": "Unit V – Representation Learning",
+      "cards": [
+        { "question": "What is representation learning?", "answer": "Automatically learning features (representations) from raw data that make downstream tasks easier, rather than hand-crafting features." },
+        { "question": "Why is representation learning important in deep learning?", "answer": "It discovers hierarchical, task-relevant features that improve generalization and reduce the need for manual feature engineering." },
+        { "question": "What is the difference between feature extraction and feature learning?", "answer": "Feature extraction uses pre-defined methods to derive features; feature learning (representation learning) trains models to learn features from data." },
+        { "question": "What is greedy layerwise pre-training?", "answer": "A technique where layers of a deep network are trained one at a time (often as autoencoders or RBMs) before fine-tuning the whole network." },
+        { "question": "Why is it called “greedy”?", "answer": "Because each layer is optimized independently to best reconstruct or model the previous layer's outputs without global coordination — it greedily optimizes local objectives." },
+        { "question": "What is the benefit of pre-training deep networks?", "answer": "It can initialize weights to sensible regions, help with optimization, prevent poor local minima, and improve generalization especially with limited labeled data." },
+        { "question": "What is transfer learning?", "answer": "Reusing a model or its learned representations trained on one task/domain to improve performance on another related task/domain." },
+        { "question": "What are the advantages of transfer learning?", "answer": "Reduces training time, helps when labeled data is scarce, and often improves accuracy by leveraging pretrained knowledge." },
+        { "question": "Give one example of transfer learning.", "answer": "Using ImageNet-pretrained CNN weights to initialize a model for medical image classification, then fine-tuning on the target dataset." },
+        { "question": "What is domain adaptation?", "answer": "Techniques that adapt models trained on a source domain to perform well on a different but related target domain, often by aligning representations." },
+        { "question": "How does fine-tuning work in transfer learning?", "answer": "Start with pretrained weights, optionally freeze some early layers, and continue training (with smaller learning rate) on the target data to adapt features." },
+        { "question": "What is distributed representation?", "answer": "A representation where information is encoded across multiple units (features) so each concept is represented by a pattern across neurons." },
+        { "question": "How is distributed representation related to word embeddings?", "answer": "Word embeddings (e.g., word2vec) are distributed: each word is represented by a dense vector where semantics are encoded across dimensions." },
+        { "question": "What are the advantages of distributed representations?", "answer": "They are compact, generalize better, allow compositionality, and can capture similarity/relationships among inputs." },
+        { "question": "What is DenseNet?", "answer": "A CNN architecture where each layer receives inputs from all previous layers via dense connections, improving information/gradient flow." },
+        { "question": "How is DenseNet different from ResNet?", "answer": "ResNet uses additive skip connections (residuals) while DenseNet concatenates feature maps from all earlier layers, promoting feature reuse." },
+        { "question": "What are the benefits of dense connections in DenseNet?", "answer": "Improved gradient flow, parameter efficiency, feature reuse, and often better accuracy with fewer parameters." }
+      ]
+    },
+    {
+      "title": "Unit VI – Applications of Deep Learning",
+      "cards": [
+        { "question": "What are some common applications of deep learning?", "answer": "Image classification, object detection, speech recognition, NLP tasks, recommendation systems, autonomous driving, medical imaging, and more." },
+        { "question": "Why is deep learning suitable for these applications?", "answer": "Because it learns hierarchical, high-capacity features directly from raw data and scales well with large datasets." },
+        { "question": "What are the challenges in applying deep learning to real-world problems?", "answer": "Data availability/quality, model interpretability, computational cost, deployment complexity, and distribution shifts." },
+        { "question": "How does deep learning perform image classification?", "answer": "By learning convolutional feature extractors followed by classifiers that map learned representations to class probabilities." },
+        { "question": "What CNN architectures are commonly used for image classification?", "answer": "VGG, ResNet, Inception, DenseNet, EfficientNet, MobileNet; choice depends on accuracy/efficiency trade-offs." },
+        { "question": "What is the role of convolution and pooling layers?", "answer": "Convolutions extract spatially local features using weight sharing; pooling reduces spatial size and provides invariance and computational reduction." },
+        { "question": "How is deep learning used in speech recognition?", "answer": "Acoustic models (CNNs/RNNs/Transformer-based) map audio features to phonetic or textual outputs, often combined with language models." },
+        { "question": "What type of neural networks are used for speech data?", "answer": "RNNs/LSTMs/GRUs, CNNs for spectrograms, and increasingly Transformers and conformers for improved sequence modeling." },
+        { "question": "What is the difference between speech recognition and speech synthesis?", "answer": "Speech recognition converts audio to text (ASR); speech synthesis (TTS) converts text to audio." },
+        { "question": "What is NLP?", "answer": "Natural Language Processing: algorithms to understand, generate, and reason about human language." },
+        { "question": "How are RNNs and LSTMs used in NLP?", "answer": "They model sequential text for tasks like language modeling, tagging, translation, and sequence labeling." },
+        { "question": "What is word embedding?", "answer": "A dense vector representation of words that captures semantic similarity and syntactic relationships." },
+        { "question": "What are attention mechanisms and Transformers?", "answer": "Attention lets models weight different input positions dynamically. Transformers use self-attention layers to model global dependencies efficiently and are state-of-the-art for many NLP tasks." },
+        { "question": "Give examples of NLP applications using deep learning.", "answer": "Machine translation, sentiment analysis, question answering, summarization, chatbots, and named entity recognition." },
+        { "question": "How does a recommender system work?", "answer": "It predicts user preferences by modeling users and items via collaborative filtering, content-based methods, or hybrid/deep learning models." },
+        { "question": "What are content-based and collaborative filtering methods?", "answer": "Content-based recommends items similar to those a user liked (based on item features); collaborative filtering uses interactions of many users to find similar users or items." },
+        { "question": "How can deep learning improve recommender systems?", "answer": "By learning complex user/item representations from heterogeneous data (text, images, behavior), modeling sequential interactions, and combining side information." },
+        { "question": "How can deep learning be used in social network analysis?", "answer": "By learning node/graph embeddings for tasks like node classification, link prediction, influence estimation, and community detection." },
+        { "question": "What is graph-based deep learning?", "answer": "Neural models like GNNs (GCN, GraphSAGE, GAT) that operate on graph-structured data to learn node/edge/graph representations." },
+        { "question": "What are community detection and link prediction?", "answer": "Community detection finds clusters of related nodes; link prediction forecasts which pairs of nodes are likely to form edges in the future." }
+      ]
+    },
+    {
+      "title": "Bonus — General Deep Learning",
+      "cards": [
+        { "question": "What is the difference between AI, ML, and Deep Learning?", "answer": "AI is the broad field of machines performing intelligent tasks. ML is a subset of AI where systems learn from data. Deep Learning is a subset of ML using deep neural networks." },
+        { "question": "What is a neural network?", "answer": "A parameterized function made of layers of interconnected units (neurons) that apply linear transforms and nonlinear activations to learn mappings from inputs to outputs." },
+        { "question": "What is backpropagation?", "answer": "An algorithm to compute gradients of the loss w.r.t. network parameters using the chain rule, enabling gradient-based optimization (e.g., SGD)." },
+        { "question": "What is overfitting and how can it be reduced?", "answer": "Overfitting is when a model fits training data too closely and generalizes poorly. Reduce via regularization, dropout, early stopping, data augmentation, or more data." },
+        { "question": "What are activation functions?", "answer": "Nonlinear functions applied to neuron outputs (ReLU, sigmoid, tanh, softmax) that enable networks to learn complex mappings." },
+        { "question": "What is the difference between supervised and unsupervised learning?", "answer": "Supervised uses labeled data to learn input-output mappings; unsupervised finds patterns in unlabeled data (e.g., clustering, autoencoders)." },
+        { "question": "What are epochs, batches, and iterations?", "answer": "Epoch: one full pass over training data. Batch: subset of data used to compute a gradient step. Iteration: one update step (processing one batch). Number of iterations per epoch = dataset_size / batch_size." },
+        { "question": "What is dropout regularization?", "answer": "Randomly drops units during training to prevent co-adaptation, acting as model averaging and improving generalization." }
+      ]
+    }
+  ]
+}
