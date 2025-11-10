@@ -594,6 +594,15 @@
         </div>
 
         <div class="filter-group">
+          <span class="filter-icon">🧾</span>
+          <select id="subjectSelect" aria-label="Choose subject">
+            <option value="flashcardDL.json">Deep Learning</option>
+            <option value="flashcardISR.json">Information Storage and Retrieval</option>
+            <!-- Add more subject->json mappings as needed -->
+          </select>
+        </div>
+
+        <div class="filter-group">
           <span class="filter-icon">📚</span>
           <select id="unitSelect" aria-label="Choose unit">
             <option value="all">All Units</option>
@@ -649,12 +658,33 @@
 
 <script>
 (async function(){
-//   Sample data - replace with your flashcardDL.json
-const dataUrl = 'flashcardDL.json';
+  // choose JSON via ?subject=<filename> or the subject selector
+  const subjectSelect = document.getElementById('subjectSelect');
+  const params = new URLSearchParams(location.search);
+  let dataUrl = params.get('subject') || 'flashcardDL.json';
+  // reflect chosen file in the UI (if option exists)
+  if (subjectSelect) subjectSelect.value = dataUrl;
+
+  // change subject -> reload with subject param so the new JSON file gets loaded
+  if (subjectSelect) {
+    subjectSelect.addEventListener('change', (e) => {
+      const val = e.target.value;
+      const url = new URL(location.href);
+      url.searchParams.set('subject', val);
+      // reload the page so the same initialization logic runs with the new file
+      location.href = url.toString();
+    });
+  }
+
   let db = await fetch(dataUrl).then(r=>r.json()).catch(e=>{
-    alert('Could not load flashcards.json — make sure it is in the same folder as index.html');
+    alert(`Could not load ${dataUrl} — make sure it is in the same folder as index.html`);
     throw e;
   });
+
+  // Update title and brand text based on subject
+  document.title = `${db.meta.subject} — Viva Flashcards`;
+  document.querySelector('.brand-text h1').textContent = `${db.meta.subject} — Viva Flashcards`;
+  document.querySelector('.brand-text p').textContent = `${db.meta.notes}`;
 
   // Flatten cards with unit metadata
   let cards = [];

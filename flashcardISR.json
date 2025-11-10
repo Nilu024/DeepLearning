@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "subject": "Information Storage and Retrieval (SPPU 2019)",
+    "generated": "2025-11-11",
+    "notes": "Comprehensive viva preparation JSON — concise Q&A for all six units of ISR subject (SPPU 2019 IT syllabus)."
+  },
+  "units": [
+    {
+      "title": "Unit I – Introduction to Information Retrieval",
+      "cards": [
+        { "question": "What is Information Retrieval (IR)?", "answer": "IR is the process of obtaining relevant information from a large collection of unstructured data, usually text documents, based on user queries." },
+        { "question": "Differentiate between Data Retrieval and Information Retrieval.", "answer": "Data retrieval focuses on exact matches in structured data (e.g., SQL queries), while IR deals with relevance and ranking in unstructured data like text." },
+        { "question": "Explain the relationship between Text Mining and Information Retrieval.", "answer": "IR focuses on finding relevant documents, while text mining extracts patterns or knowledge from retrieved text." },
+        { "question": "What are the main components of an IR system?", "answer": "Document representation, indexing, searching, ranking, query processing, and user interface." },
+        { "question": "Define ‘Index Term Weighting’.", "answer": "It assigns numerical importance to terms (e.g., TF-IDF) indicating how strongly they represent document content." },
+        { "question": "What is Automatic Text Analysis?", "answer": "It is the process of automatically analyzing and transforming text into structured form for retrieval, including tokenization and stemming." },
+        { "question": "What is the Conflation Algorithm?", "answer": "A method (like stemming) that merges words with similar roots into one term, e.g., ‘connect’, ‘connected’, ‘connection’ → ‘connect’." },
+        { "question": "What is Probabilistic Indexing?", "answer": "A method where documents and queries are represented probabilistically, ranking results by likelihood of relevance." },
+        { "question": "What are Measures of Association?", "answer": "Numerical metrics (e.g., cosine similarity, Jaccard coefficient) used to compute document-query or term-term similarity." },
+        { "question": "What is the Cluster Hypothesis?", "answer": "It states that documents similar to each other are likely to be relevant to the same queries." },
+        { "question": "Explain Rocchio’s Algorithm.", "answer": "A relevance feedback method that updates query vectors using weighted averages of relevant and non-relevant documents." },
+        { "question": "Differentiate between Single Link and Complete Link Algorithms.", "answer": "Single link clusters based on minimum inter-cluster distance; complete link uses maximum inter-cluster distance." },
+        { "question": "Why is clustering important in IR?", "answer": "It groups similar documents, improving search efficiency and supporting query expansion and relevance feedback." },
+        { "question": "What are the challenges in implementing IR systems?", "answer": "Handling unstructured data, scalability, relevance ranking, user intent understanding, and multilingual retrieval." }
+      ]
+    },
+    {
+      "title": "Unit II – Indexing and Searching Techniques",
+      "cards": [
+        { "question": "What is Indexing?", "answer": "Indexing organizes document terms to enable fast and efficient search and retrieval." },
+        { "question": "Explain Inverted File Indexing.", "answer": "An inverted index maps each term to the list of documents containing it, forming the core of most search engines." },
+        { "question": "What are Signature Files?", "answer": "Bit patterns (signatures) created for documents used to filter out irrelevant documents during search." },
+        { "question": "What is Scatter Storage or Hash Addressing?", "answer": "A hashing-based method where terms are assigned addresses for quick retrieval of document references." },
+        { "question": "What are Suffix Trees and Suffix Arrays?", "answer": "Data structures for efficient substring and pattern searches in text databases." },
+        { "question": "Explain Boolean Search.", "answer": "Uses logical operators (AND, OR, NOT) to retrieve documents satisfying specific conditions." },
+        { "question": "What is the Vector Space Model?", "answer": "Represents documents and queries as vectors in term space; retrieval is based on cosine similarity." },
+        { "question": "Explain the Probabilistic Model.", "answer": "Ranks documents based on the estimated probability that a document is relevant to a query." },
+        { "question": "Differentiate between Boolean, Vector, and Probabilistic Models.", "answer": "Boolean retrieves exact matches; Vector uses similarity measures; Probabilistic ranks by likelihood of relevance." },
+        { "question": "What is Pattern Matching?", "answer": "Finding occurrences of a specific pattern or term sequence within text data." },
+        { "question": "What are Query Languages?", "answer": "Languages used to express user information needs, e.g., Boolean, SQL-like, or natural language queries." },
+        { "question": "Explain Cluster-based Retrieval.", "answer": "Retrieval that uses document clusters instead of individual documents to improve relevance and reduce search cost." },
+        { "question": "What are the limitations of Vector Model?", "answer": "Assumes term independence and doesn’t handle semantics or context effectively." },
+        { "question": "What is an Inverted Index advantage?", "answer": "It supports fast retrieval and relevance ranking with low storage overhead." }
+      ]
+    },
+    {
+      "title": "Unit III – Evaluation and Visualization of IR Systems",
+      "cards": [
+        { "question": "What is Precision?", "answer": "The fraction of retrieved documents that are relevant to the query." },
+        { "question": "What is Recall?", "answer": "The fraction of relevant documents that are successfully retrieved by the system." },
+        { "question": "What is F-Score?", "answer": "The harmonic mean of precision and recall, used as a balanced measure of IR performance." },
+        { "question": "What is Mean Reciprocal Rank (MRR)?", "answer": "The average of reciprocal ranks of the first relevant document for multiple queries." },
+        { "question": "What is NDCG?", "answer": "Normalized Discounted Cumulative Gain measures ranking quality considering graded relevance and order." },
+        { "question": "What are user-oriented evaluation measures?", "answer": "Measures based on user satisfaction, interaction time, and success rate." },
+        { "question": "What is Query Expansion?", "answer": "Adding related terms to a query to improve recall and relevance of results." },
+        { "question": "What is user relevance judgment?", "answer": "User’s subjective decision on whether a retrieved document satisfies their information need." },
+        { "question": "What is the importance of visualization in IR?", "answer": "It helps users interpret relationships among documents, clusters, and relevance patterns visually." },
+        { "question": "What are the limitations of evaluation metrics?", "answer": "They may not fully reflect user satisfaction and depend on test collection quality." }
+      ]
+    },
+    {
+      "title": "Unit IV – Distributed and Multimedia Information Retrieval",
+      "cards": [
+        { "question": "What is Distributed Information Retrieval (DIR)?", "answer": "A system where information is spread across multiple databases, requiring coordination for retrieval." },
+        { "question": "Explain Collection Partitioning.", "answer": "Dividing a large dataset into smaller subsets to improve distributed retrieval efficiency." },
+        { "question": "What is Source Selection?", "answer": "Choosing which databases to search in distributed retrieval to optimize performance and relevance." },
+        { "question": "Explain Query Processing in DIR.", "answer": "Involves query submission, distributed searching, and merging of results from multiple sources." },
+        { "question": "What is Multimedia Information Retrieval (MIR)?", "answer": "Retrieval of multimedia data like images, audio, and video using content or metadata." },
+        { "question": "What is Data Modeling in MIR?", "answer": "Defining data structures and features representing multimedia content for retrieval." },
+        { "question": "What is a Spatial Access Method?", "answer": "Indexing techniques (like R-trees) used for efficient retrieval of spatial and multimedia data." },
+        { "question": "What is Metadata?", "answer": "Descriptive information about data content, structure, and context used for efficient retrieval." },
+        { "question": "Explain Content-based Image Retrieval.", "answer": "Retrieval based on visual features such as color, shape, and texture instead of text tags." },
+        { "question": "What are challenges in MIR?", "answer": "Feature extraction, semantic gap, large storage needs, and diverse media formats." }
+      ]
+    },
+    {
+      "title": "Unit V – Web Searching",
+      "cards": [
+        { "question": "What is Web Searching?", "answer": "Finding relevant web pages from the Internet using search engines based on user queries." },
+        { "question": "How is Web IR different from traditional IR?", "answer": "Web IR deals with huge, dynamic, and heterogeneous data with hyperlink structures, unlike static document sets." },
+        { "question": "What are the main components of a Search Engine?", "answer": "Crawler, indexer, query processor, ranking module, and user interface." },
+        { "question": "What is Web Crawling?", "answer": "Automatic process of traversing web pages via hyperlinks to gather and index data." },
+        { "question": "What are Web Indices?", "answer": "Databases created by search engines to store page contents and metadata for fast retrieval." },
+        { "question": "Explain PageRank Algorithm.", "answer": "Ranks web pages based on the number and quality of incoming links, assuming important pages are linked more." },
+        { "question": "What are Meta Search Engines?", "answer": "Search engines that aggregate results from multiple other search engines." },
+        { "question": "What is Web Scraping?", "answer": "Automated extraction of data from web pages using tools or scripts." },
+        { "question": "How is Python used in Web Scraping?", "answer": "Libraries like BeautifulSoup, Scrapy, and Requests are used to fetch and parse web data." },
+        { "question": "What are ethical concerns in Web Scraping?", "answer": "Respecting robots.txt, avoiding server overload, and not misusing proprietary or personal data." }
+      ]
+    },
+    {
+      "title": "Unit VI – Advanced Information Retrieval",
+      "cards": [
+        { "question": "What is XML Retrieval?", "answer": "Retrieving information from XML documents using structure and content-based matching." },
+        { "question": "What are the basic concepts of XML?", "answer": "XML uses hierarchical tags to represent structured data that separates content from presentation." },
+        { "question": "What are challenges in XML retrieval?", "answer": "Dealing with nested structures, varying granularity, and ranking structured elements." },
+        { "question": "What is a Recommender System?", "answer": "A system suggesting items to users based on preferences using collaborative or content-based methods." },
+        { "question": "Differentiate between Collaborative and Content-Based Filtering.", "answer": "Collaborative uses user-item interactions; content-based uses item attributes and user profiles." },
+        { "question": "What is the Semantic Web?", "answer": "An extension of the web where information is given well-defined meaning using ontologies for machine understanding." },
+        { "question": "What is Ontology in IR?", "answer": "A formal representation of knowledge defining relationships between concepts to enhance retrieval accuracy." },
+        { "question": "What are the advantages of XML in IR?", "answer": "Supports structured, flexible, and semantically rich information representation." },
+        { "question": "Give real-life applications of Recommender Systems.", "answer": "E-commerce (Amazon), streaming (Netflix), and social platforms (YouTube, Spotify) recommendations." }
+      ]
+    },
+    {
+      "title": "Bonus – General ISR Concepts",
+      "cards": [
+        { "question": "What are applications of Information Retrieval?", "answer": "Search engines, digital libraries, recommender systems, and question answering systems." },
+        { "question": "How is IR used in search engines like Google?", "answer": "By indexing web pages, matching user queries, ranking results, and learning from user feedback." },
+        { "question": "How does clustering improve search efficiency?", "answer": "By grouping similar documents, reducing search space, and improving result organization." },
+        { "question": "What is the role of NLP in IR?", "answer": "Improves query understanding, semantic matching, and document analysis using linguistic processing." },
+        { "question": "What are current research trends in IR?", "answer": "Personalized search, semantic retrieval, machine learning-based ranking, and multimedia retrieval." }
+      ]
+    }
+  ]
+}
